@@ -33,6 +33,8 @@ fileprivate enum tmdbEndpoints: URLRequestConvertible {
 
 final class MCtmdbAPI: MCAPI {
 
+    private let apiKey = "".c._8._8.f._5.d.e.c.b.e._1.d._6._4.c.c._2._7._6._8._5.a.c._5._0._9._0._4._4._3._7._6
+
     var sessionManager: SessionManager {
         get {
             return Alamofire.SessionManager.default
