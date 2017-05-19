@@ -21,6 +21,9 @@
 		B9364BD41ECEE27200B5F7E0 /* MCAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BD31ECEE27200B5F7E0 /* MCAPIProtocol.swift */; };
 		B9364BD71ECEF0C400B5F7E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9364BD51ECEF0C400B5F7E0 /* Main.storyboard */; };
 		B9364BDE1ECEF11800B5F7E0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9364BE01ECEF11800B5F7E0 /* Localizable.strings */; };
+		B9364BE61ECEF55400B5F7E0 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BE51ECEF55400B5F7E0 /* R.generated.swift */; };
+		B9364BE81ECEF57C00B5F7E0 /* MCDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BE71ECEF57C00B5F7E0 /* MCDetailsViewController.swift */; };
+		B9364BEA1ECF082600B5F7E0 /* Trackr.plist in Resources */ = {isa = PBXBuildFile; fileRef = B9364BE91ECF082600B5F7E0 /* Trackr.plist */; };
 		E7B9030024B1137142794146 /* Pods_Trackr2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B96DABF381B834289AA7758 /* Pods_Trackr2.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +62,9 @@
 		B9364BD91ECEF0EC00B5F7E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B9364BDF1ECEF11800B5F7E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B9364BE11ECEF12600B5F7E0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B9364BE51ECEF55400B5F7E0 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		B9364BE71ECEF57C00B5F7E0 /* MCDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCDetailsViewController.swift; sourceTree = "<group>"; };
+		B9364BE91ECF082600B5F7E0 /* Trackr.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Trackr.plist; path = Trackr2/Trackr.plist; sourceTree = "<group>"; };
 		E50B01694508FB889B84267E /* Pods_Trackr2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Trackr2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -94,6 +100,8 @@
 		B9364B961ECE4FEB00B5F7E0 = {
 			isa = PBXGroup;
 			children = (
+				B9364BE51ECEF55400B5F7E0 /* R.generated.swift */,
+				B9364BE91ECF082600B5F7E0 /* Trackr.plist */,
 				B9364BA11ECE4FEB00B5F7E0 /* Trackr2 */,
 				B9364BB61ECE4FEB00B5F7E0 /* Trackr2Tests */,
 				B9364BA01ECE4FEB00B5F7E0 /* Products */,
@@ -115,8 +123,9 @@
 			isa = PBXGroup;
 			children = (
 				B9364BA21ECE4FEB00B5F7E0 /* AppDelegate.swift */,
-				B9364BCC1ECE527700B5F7E0 /* UAObfuscatedString.swift */,
-				B9364BC91ECE521100B5F7E0 /* TableView */,
+				B9364BD21ECEE26400B5F7E0 /* API */,
+				B9364BE21ECEF2C900B5F7E0 /* Lib */,
+				B9364BC91ECE521100B5F7E0 /* Initial screen */,
 				B9364BC81ECE520B00B5F7E0 /* Model */,
 				B9364BCA1ECE526000B5F7E0 /* MCConstants.swift */,
 				B9364BA91ECE4FEB00B5F7E0 /* Assets.xcassets */,
@@ -145,14 +154,14 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		B9364BC91ECE521100B5F7E0 /* TableView */ = {
+		B9364BC91ECE521100B5F7E0 /* Initial screen */ = {
 			isa = PBXGroup;
 			children = (
 				B9364BC21ECE514400B5F7E0 /* MCMovieTableViewCell.swift */,
-				B9364BD21ECEE26400B5F7E0 /* API */,
 				B9364BC61ECE51A600B5F7E0 /* MCMovieListTableViewController.swift */,
+				B9364BE71ECEF57C00B5F7E0 /* MCDetailsViewController.swift */,
 			);
-			name = TableView;
+			name = "Initial screen";
 			sourceTree = "<group>";
 		};
 		B9364BD21ECEE26400B5F7E0 /* API */ = {
@@ -163,6 +172,14 @@
 				B9364BD01ECEE26000B5F7E0 /* MCTrackrAPI.swift */,
 			);
 			name = API;
+			sourceTree = "<group>";
+		};
+		B9364BE21ECEF2C900B5F7E0 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				B9364BCC1ECE527700B5F7E0 /* UAObfuscatedString.swift */,
+			);
+			name = Lib;
 			sourceTree = "<group>";
 		};
 		E472AE3EAB385ABCF79E5E86 /* Pods */ = {
@@ -184,6 +201,7 @@
 			buildConfigurationList = B9364BBC1ECE4FEB00B5F7E0 /* Build configuration list for PBXNativeTarget "Trackr2" */;
 			buildPhases = (
 				8E1960293D5DEC4B78186846 /* [CP] Check Pods Manifest.lock */,
+				B9364BE41ECEF52300B5F7E0 /* R Swift */,
 				B9364B9B1ECE4FEB00B5F7E0 /* Sources */,
 				B9364B9C1ECE4FEB00B5F7E0 /* Frameworks */,
 				B9364B9D1ECE4FEB00B5F7E0 /* Resources */,
@@ -269,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9364BAA1ECE4FEB00B5F7E0 /* Assets.xcassets in Resources */,
+				B9364BEA1ECF082600B5F7E0 /* Trackr.plist in Resources */,
 				B9364BDE1ECEF11800B5F7E0 /* Localizable.strings in Resources */,
 				B9364BD71ECEF0C400B5F7E0 /* Main.storyboard in Resources */,
 			);
@@ -344,6 +363,20 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		B9364BE41ECEF52300B5F7E0 /* R Swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "R Swift";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" \"$SRCROOT\"";
+		};
 		D53A65C70E7978ADEDB72DF6 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -383,11 +416,13 @@
 			files = (
 				B9364BCD1ECE527700B5F7E0 /* UAObfuscatedString.swift in Sources */,
 				B9364BC71ECE51A600B5F7E0 /* MCMovieListTableViewController.swift in Sources */,
+				B9364BE81ECEF57C00B5F7E0 /* MCDetailsViewController.swift in Sources */,
 				B9364BC51ECE515F00B5F7E0 /* MCModel.swift in Sources */,
 				B9364BCF1ECEE25600B5F7E0 /* MCtmdbAPI.swift in Sources */,
 				B9364BCB1ECE526000B5F7E0 /* MCConstants.swift in Sources */,
 				B9364BD11ECEE26000B5F7E0 /* MCTrackrAPI.swift in Sources */,
 				B9364BA31ECE4FEB00B5F7E0 /* AppDelegate.swift in Sources */,
+				B9364BE61ECEF55400B5F7E0 /* R.generated.swift in Sources */,
 				B9364BC31ECE514400B5F7E0 /* MCMovieTableViewCell.swift in Sources */,
 				B9364BD41ECEE27200B5F7E0 /* MCAPIProtocol.swift in Sources */,
 			);

@@ -11,6 +11,8 @@ target 'Trackr2' do
   
   pod 'SwiftyJSON'
 
+  pod 'R.swift'
+
   target 'Trackr2Tests' do
     inherit! :search_paths
     # Pods for testing
