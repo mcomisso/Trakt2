@@ -11,7 +11,7 @@ import Alamofire
 
 fileprivate enum tmdbEndpoints: URLRequestConvertible {
 
-    static let baseURL = ""
+    static let baseURL = "https://api.themoviedb.org/3"
 
     case configuration()// = "/configuration"
     case movie()// = "/movie"
