@@ -7,3 +7,104 @@
 //
 
 import Foundation
+
+typealias StandardDict = [String: Any]
+
+enum SerializableError: Error {
+    case saveFile
+}
+
+protocol SerializableStruct {
+    var asDictionary: StandardDict { get }
+    init(data: StandardDict)
+}
+
+
+/// This class serializes structs to allow NSCoding saving in plist files.
+final class MCStructSerializer<T: SerializableStruct>: NSObject, NSCoding {
+
+    var structValue: T
+
+    init(structValue: T) {
+        self.structValue = structValue
+    }
+
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.structValue.asDictionary, forKey: String(describing: T.self))
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        let data = aDecoder.decodeObject(forKey: String(describing: T.self)) as! StandardDict
+        self.structValue = T(data: data)
+    }
+}
+
+
+final class MCDataLayer {
+
+    // MARK: Private variables
+    private let documentFolder: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+
+    private var movies: [Movie] = []
+
+    private var tmdbConfiguration: TMDBConfiguration!
+
+    // MARK: Initializers
+
+    init() {
+        self.read(structType: Movie.self)
+    }
+
+
+    // Read from documents directory
+
+    private func read<T: SerializableStruct>(structType: T.Type) {
+
+        let readingPath = self.documentFolder.appendingPathComponent(String(describing: T.self))
+
+
+        switch structType {
+
+        case is Movie.Type:
+            guard let objects = NSKeyedUnarchiver.unarchiveObject(withFile: readingPath.path) as? [MCStructSerializer<Movie>] else { fatalError() }
+
+            self.movies = objects.map{ $0.structValue }
+
+
+        case is TMDBConfiguration.Type:
+
+            guard let objects = NSKeyedUnarchiver.unarchiveObject(withFile: readingPath.path) as? [MCStructSerializer<TMDBConfiguration>],
+                let configuration = objects.first else { fatalError() }
+
+            self.tmdbConfiguration = configuration.structValue
+
+
+        default:
+            fatalError("Struct not implemented")
+        }
+    }
+
+
+    // Write to documents directory
+
+    private func save<T: SerializableStruct>(structs: [T]) throws {
+
+        let savePath = self.documentFolder.appendingPathComponent(String(describing: T.self))
+
+        let archiveData = structs.map{ $0.asDictionary }
+        if !NSKeyedArchiver.archiveRootObject(archiveData, toFile: savePath.path ) {
+            throw SerializableError.saveFile
+        }
+    }
+
+
+    func listMovies() -> [Movie] {
+        return self.movies
+    }
+
+
+    public func readTMDBConfiguration() -> TMDBConfiguration {
+        return self.tmdbConfiguration
+    }
+
+}
