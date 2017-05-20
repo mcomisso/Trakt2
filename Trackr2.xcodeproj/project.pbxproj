@@ -24,6 +24,7 @@
 		B9364BE61ECEF55400B5F7E0 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BE51ECEF55400B5F7E0 /* R.generated.swift */; };
 		B9364BE81ECEF57C00B5F7E0 /* MCDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BE71ECEF57C00B5F7E0 /* MCDetailsViewController.swift */; };
 		B9364BEA1ECF082600B5F7E0 /* Trackr.plist in Resources */ = {isa = PBXBuildFile; fileRef = B9364BE91ECF082600B5F7E0 /* Trackr.plist */; };
+		B9364BEC1ECF2C0B00B5F7E0 /* MCDataLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BEB1ECF2C0B00B5F7E0 /* MCDataLayer.swift */; };
 		E7B9030024B1137142794146 /* Pods_Trackr2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B96DABF381B834289AA7758 /* Pods_Trackr2.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		B9364BE51ECEF55400B5F7E0 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		B9364BE71ECEF57C00B5F7E0 /* MCDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCDetailsViewController.swift; sourceTree = "<group>"; };
 		B9364BE91ECF082600B5F7E0 /* Trackr.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Trackr.plist; path = Trackr2/Trackr.plist; sourceTree = "<group>"; };
+		B9364BEB1ECF2C0B00B5F7E0 /* MCDataLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCDataLayer.swift; sourceTree = "<group>"; };
 		E50B01694508FB889B84267E /* Pods_Trackr2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Trackr2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -125,6 +127,7 @@
 				B9364BA21ECE4FEB00B5F7E0 /* AppDelegate.swift */,
 				B9364BD21ECEE26400B5F7E0 /* API */,
 				B9364BE21ECEF2C900B5F7E0 /* Lib */,
+				B9364BEB1ECF2C0B00B5F7E0 /* MCDataLayer.swift */,
 				B9364BC91ECE521100B5F7E0 /* Initial screen */,
 				B9364BC81ECE520B00B5F7E0 /* Model */,
 				B9364BCA1ECE526000B5F7E0 /* MCConstants.swift */,
@@ -425,6 +428,7 @@
 				B9364BE61ECEF55400B5F7E0 /* R.generated.swift in Sources */,
 				B9364BC31ECE514400B5F7E0 /* MCMovieTableViewCell.swift in Sources */,
 				B9364BD41ECEE27200B5F7E0 /* MCAPIProtocol.swift in Sources */,
+				B9364BEC1ECF2C0B00B5F7E0 /* MCDataLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
