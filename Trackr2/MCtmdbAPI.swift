@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-fileprivate enum tmdbEndpoints: URLRequestConvertible {
+fileprivate enum tmdbEndpoints: Endpoint {
 
     static let baseURL = "https://api.themoviedb.org/3"
 
@@ -41,7 +41,12 @@ final class MCtmdbAPI: MCAPI {
         }
     }
 
-    func request(endpoint: URLRequestConvertible) -> DataRequest {
-        return self.sessionManager.request(endpoint)
+    func request(endpoint: Endpoint) -> DataRequest {
+        let defaultParameters: Parameters = ["api_key": self.apiKey]
+
+        var urlReq = try! endpoint.asURLRequest()
+        urlReq = try! URLEncoding.default.encode(urlReq, with: defaultParameters)
+
+        return self.sessionManager.request(urlReq)
     }
 }

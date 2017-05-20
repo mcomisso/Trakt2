@@ -9,9 +9,11 @@
 import Foundation
 import Alamofire
 
+typealias Endpoint = URLRequestConvertible
+
 protocol MCAPI {
 
     var sessionManager: SessionManager { get }
 
-    func request(endpoint: URLRequestConvertible) -> DataRequest
+    func request(endpoint: Endpoint) -> DataRequest
 }
