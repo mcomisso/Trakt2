@@ -9,8 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-
-struct TMDBConfiguration {
+struct TMDBConfiguration: SerializableStruct {
     let baseUrl: String
     let secureBaseUrl: String
 
@@ -32,6 +31,29 @@ struct TMDBConfiguration {
         self.profileSizes = images["profile_sizes"].arrayValue.map { $0.stringValue }
     }
 
+    var asDictionary: StandardDict {
+        get {
+            return [
+                "baseUrl": self.baseUrl
+            ]
+        }
+    }
+
+    init(data: StandardDict) {
+        guard let baseURL = data["baseUrl"] as? String,
+            let secureBaseUrl = data["secureBaseUrl"] as? String,
+            let backdropSizes = data["backdropSizes"] as? [String],
+            let posterSizes = data["posterSizes"] as? [String],
+            let profileSizes = data["profileSizes"] as? [String],
+            let logoSizes = data["logoSizes"] as? [String]
+            else { fatalError() }
+
+        self.baseUrl = baseURL
+        self.secureBaseUrl = secureBaseUrl
+        self.backdropSizes = backdropSizes
+        self.posterSizes = posterSizes
+        self.profileSizes = profileSizes
+        self.logoSizes = logoSizes
     }
 }
 
