@@ -14,14 +14,14 @@ fileprivate enum tmdbEndpoints: Endpoint {
     static let baseURL = "https://api.themoviedb.org/3"
 
     case configuration()// = "/configuration"
-    case movie()// = "/movie"
+    case movie(id: String)// = "/movie"
 
     var path: String {
         switch self {
         case .configuration:
             return "/configuration"
-        case .movie:
-            return "/movie"
+        case .movie(let id):
+            return "/movie/\(id)"
         }
     }
 
