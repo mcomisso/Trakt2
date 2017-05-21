@@ -10,6 +10,7 @@ target 'Trackr2' do
   pod 'AlamofireImage'
   
   pod 'SwiftyJSON'
+  pod 'Whisper'
 
   pod 'R.swift'
 
