@@ -103,8 +103,27 @@ final class MCDataLayer {
     }
 
 
-    public func readTMDBConfiguration() -> TMDBConfiguration {
-        return self.tmdbConfiguration
+
+    public func readTMDBConfiguration(completion: @escaping Completion) {
+
+        if let conf = self.tmdbConfiguration {
+            completion(true, conf)
+        } else {
+            MCtmdbAPI().request(endpoint: tmdbEndpoints.configuration()).response { [weak self] (resp) in
+                guard let strongSelf = self else { return }
+
+                if let error = resp.error {
+                    print(error.localizedDescription)
+                    completion(false, nil)
+                } else if let data = resp.data {
+                    let conf = TMDBConfiguration(data: data)
+
+                    try! strongSelf.save(conf)
+                    strongSelf.tmdbConfiguration = conf
+                    completion(true, conf)
+                }
+            }
+        }
     }
 
 }
