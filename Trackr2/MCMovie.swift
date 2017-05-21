@@ -75,23 +75,23 @@ struct Movie: SerializableStruct {
 }
 
 
-
-struct Person {
-    let name: String
-    let traktId: Int
-    let slug: String
-    let imdb: String
-    let tmdb: Int
-    let tvrage: Int
-
-    init(json: JSON) {
-        self.name = json["name"].stringValue
-        self.traktId = json["ids"]["trakt"].intValue
-        self.slug = json["ids"]["slug"].stringValue
-
-        self.imdb   = json["ids"]["imdb"].stringValue
-        self.tmdb   = json["ids"]["tmdb"].intValue
-        self.tvrage = json["ids"]["tvrage"].intValue
-    }
-    
-}
+//
+//struct Person {
+//    let name: String
+//    let traktId: Int
+//    let slug: String
+//    let imdb: String
+//    let tmdb: Int
+//    let tvrage: Int
+//
+//    init(json: JSON) {
+//        self.name = json["name"].stringValue
+//        self.traktId = json["ids"]["trakt"].intValue
+//        self.slug = json["ids"]["slug"].stringValue
+//
+//        self.imdb   = json["ids"]["imdb"].stringValue
+//        self.tmdb   = json["ids"]["tmdb"].intValue
+//        self.tvrage = json["ids"]["tvrage"].intValue
+//    }
+//    
+//}
