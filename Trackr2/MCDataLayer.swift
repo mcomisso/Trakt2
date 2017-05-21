@@ -45,20 +45,22 @@ final class MCDataLayer {
     // MARK: Private variables
     private let documentFolder: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 
-    private var movies: [Movie] = []
+    fileprivate var movies: [Movie] = []
+    fileprivate var tmdbConfiguration: TMDBConfiguration?
 
-    private var tmdbConfiguration: TMDBConfiguration!
+    fileprivate let traktAPI = MCTraktAPI()
 
     // MARK: Initializers
 
     init() {
         self.read(structType: Movie.self)
+        self.read(structType: TMDBConfiguration.self)
     }
 
 
     // Read from documents directory
 
-    private func read<T: SerializableStruct>(structType: T.Type) {
+    fileprivate func read<T: SerializableStruct>(structType: T.Type) {
 
         let readingPath = self.documentFolder.appendingPathComponent(String(describing: T.self))
 
