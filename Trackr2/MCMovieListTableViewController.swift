@@ -64,7 +64,7 @@ class MCMovieListTableViewController: UITableViewController {
             fatalError("This tableView supports only MCMovieTableViewCell cells")
         }
 
-        cell.setMovie(self.movies[indexPath.row])
+        cell.movie = self.movies[indexPath.row]
 
         return cell
     }

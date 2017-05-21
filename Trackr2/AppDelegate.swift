@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 
         // Empty block
-        MCDataLayer().readTMDBConfiguration { _,_ in }
+        
 
         return true
     }

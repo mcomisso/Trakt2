@@ -9,6 +9,17 @@
 import Foundation
 import SwiftyJSON
 
+typealias StandardDict = [String: Any]
+
+enum SerializableError: Error {
+    case saveFile
+}
+
+protocol SerializableStruct {
+    var asDictionary: StandardDict { get }
+    init(data: StandardDict)
+}
+
 struct TMDBConfiguration: SerializableStruct {
     let baseUrl: String
     let secureBaseUrl: String

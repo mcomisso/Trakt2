@@ -21,9 +21,9 @@ class MCMovieTableViewCell: UITableViewCell {
         }
     }
 
-    func setMovie(_ movie: Movie) {
-        self.movie = movie
-    }
+//    func setMovie(_ movie: Movie) {
+//        self.movie = movie
+//    }
 
 
     func loadCover() {

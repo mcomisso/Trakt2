@@ -8,21 +8,12 @@
 
 import Foundation
 import SwiftyJSON
+import RealmSwift
 
 
 typealias MovieCompletion = (Bool, [Movie]) -> Void
 typealias Completion = (Bool, Any?) -> Void
 
-typealias StandardDict = [String: Any]
-
-enum SerializableError: Error {
-    case saveFile
-}
-
-protocol SerializableStruct {
-    var asDictionary: StandardDict { get }
-    init(data: StandardDict)
-}
 
 
 /// This class serializes structs to allow NSCoding saving in plist files.
@@ -50,19 +41,16 @@ final class MCDataLayer {
     // MARK: Private variables
     private let documentFolder: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 
-    fileprivate var movies: [Movie] = []
-    fileprivate var tmdbMovies: [TMDBMovie] = []
+    // Networking requests
+    fileprivate let traktAPI = MCTraktAPI()
 
     fileprivate var tmdbConfiguration: TMDBConfiguration?
 
-    fileprivate let traktAPI = MCTraktAPI()
+    fileprivate var movies = [Movie]()
 
     // MARK: Initializers
 
-    init() {
-        self.read(structType: Movie.self)
-        self.read(structType: TMDBConfiguration.self)
-    }
+    init() { }
 
 
     // Read from documents directory
@@ -73,16 +61,6 @@ final class MCDataLayer {
 
 
         switch structType {
-
-        case is TMDBMovie.Type:
-            if let objects = NSKeyedUnarchiver.unarchiveObject(withFile: readingPath.path) as? [MCStructSerializer<TMDBMovie>] {
-                self.tmdbMovies = objects.map{ $0.structValue }
-            }
-
-        case is Movie.Type:
-            if let objects = NSKeyedUnarchiver.unarchiveObject(withFile: readingPath.path) as? [MCStructSerializer<Movie>] {
-                self.movies = objects.map{ $0.structValue }
-            }
 
         case is TMDBConfiguration.Type:
 
@@ -124,18 +102,21 @@ final class MCDataLayer {
 
 extension MCDataLayer {
 
-
-    func listDetailsForMovie(movie: Movie, completion: (Bool, TMDBMovie)->Void) {
-
-    }
-
     func listMovies(completion: @escaping MovieCompletion)  {
+
+        var realm: Realm?
+
+        do {
+            realm = try Realm()
+        } catch {
+            print(error)
+            completion(false, self.movies)
+        }
 
         if self.movies.isEmpty {
             // Network request
 
-            self.traktAPI.request(endpoint: MCTrackrEndpoint.trendingMovies()).response { [weak self] resp in
-                guard let strongSelf = self else { return }
+            self.traktAPI.request(endpoint: MCTrackrEndpoint.trendingMovies()).response { resp in
 
                 if let error = resp.error {
                     print(error.localizedDescription)
@@ -143,13 +124,16 @@ extension MCDataLayer {
                 } else {
                     if let data = resp.data {
                         let json = JSON(data: data)
-                        for movieJSON in json.arrayValue {
+                        for (index, movieJSON) in json.arrayValue.enumerated() {
                             let movie = try! Movie(json: movieJSON)
-                            strongSelf.movies.append(movie)
+                            movie.trendingIndex = index
+                            try! realm?.write {
+                                realm?.add(movie, update: true)
+                            }
                         }
 
-                        completion(true, strongSelf.movies)
-                        try! strongSelf.save(strongSelf.movies)
+                        guard let objects = realm?.objects(Movie.self) else { completion(false, []); return }
+                        completion(true, Array(objects))
                     }
                 }
             }
@@ -161,11 +145,12 @@ extension MCDataLayer {
 
 
     public func readTMDBConfiguration(completion: @escaping Completion) {
+        let tmdbAPI = MCtmdbAPI()
 
         if let conf = self.tmdbConfiguration {
             completion(true, conf)
         } else {
-            MCtmdbAPI().request(endpoint: tmdbEndpoints.configuration()).response { [weak self] (resp) in
+            tmdbAPI.request(endpoint: tmdbEndpoints.configuration()).response { [weak self] (resp) in
                 guard let strongSelf = self else { return }
 
                 if let error = resp.error {

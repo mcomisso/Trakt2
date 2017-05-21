@@ -16,10 +16,8 @@ final class MCDetailsViewController: UIViewController {
         super.viewDidLoad()
     }
 
-    func setMovie(_ movie: Movie) {
-        self.movie = movie
-    }
-
-    
+//    func setMovie(_ movie: Movie) {
+//        self.movie = movie
+//    }
 
 }
