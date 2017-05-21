@@ -7,6 +7,11 @@
 //
 
 import Foundation
+import SwiftyJSON
+
+
+typealias MovieCompletion = (Bool, [Movie]) -> Void
+typealias Completion = (Bool, Any?) -> Void
 
 typealias StandardDict = [String: Any]
 
