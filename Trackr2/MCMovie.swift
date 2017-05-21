@@ -9,6 +9,94 @@
 import Foundation
 import SwiftyJSON
 
+struct TMDBMovie: SerializableStruct {
+
+    let id: Int
+
+    let title: String
+    let year: Int
+    let traktId: Int
+
+    let budget: String
+    let genres: [String]
+    let overview: String
+    let releaseDate: String
+    let revenue: Double
+    let status: String // Released, etc
+    let tagline: String
+    let voteAvg: Double
+
+
+    init(json: JSON, traktId: Int) throws {
+        self.id = json["id"].intValue
+        self.title = json["title"].stringValue
+        self.year = json["year"].intValue
+
+        self.traktId = traktId
+
+        self.budget = json["budget"].stringValue
+        self.genres = json["genres"].arrayValue.map{ $0.stringValue }
+        self.overview = json["overview"].stringValue
+        self.releaseDate = json["release_date"].stringValue
+        self.revenue = json["revenue"].doubleValue
+        self.status = json["status"].stringValue
+        self.tagline = json["tagline"].stringValue
+        self.voteAvg = json["vote_average"].doubleValue
+    }
+
+    var asDictionary: StandardDict {
+        get {
+            return [
+                "id": self.id,
+                "title": self.title,
+                "year": self.year,
+                "traktId": self.traktId,
+                "budget": self.budget,
+                "genres": self.genres,
+                "overview": self.overview,
+                "releaseDate": self.releaseDate,
+                "revenue": self.revenue,
+                "status": self.status,
+                "tagline": self.tagline,
+                "voteAvg": self.voteAvg
+            ]
+        }
+    }
+
+    init(data: StandardDict) {
+        guard let id = data["id"] as? Int,
+            let title = data["title"] as? String,
+            let year = data["year"] as? Int,
+            let traktId = data["traktId"] as? Int,
+        let budget = data["budget"] as? String,
+        let genres = data["genres"] as? [String],
+        let overview = data["overview"] as? String,
+        let releaseDate = data["releaseDate"] as? String,
+        let revenue = data["revenue"] as? Double,
+        let status = data["status"] as? String,
+        let tagline = data["tagline"] as? String,
+        let voteAvg = data["voteAvg"] as? Double
+
+        else { fatalError() }
+
+        self.id = id
+        self.title = title
+        self.year = year
+        self.traktId = traktId
+
+        self.budget = budget
+        self.genres = genres
+        self.overview = overview
+        self.releaseDate = releaseDate
+        self.revenue = revenue
+        self.status = status
+        self.tagline = tagline
+        self.voteAvg = voteAvg
+    }
+
+
+}
+
 struct Movie: SerializableStruct {
     let title: String
     let year: Int
@@ -47,7 +135,9 @@ struct Movie: SerializableStruct {
             let slug = data["slug"] as? String,
             let imdb = data["imdb"] as? String,
             let tmdb = data["tmdb"] as? Int,
-            let coverURL = data["coverUrl"] as? String else { fatalError() }
+            let coverURL = data["coverUrl"] as? String
+
+        else { fatalError() }
 
         self.title = title
         self.year = year

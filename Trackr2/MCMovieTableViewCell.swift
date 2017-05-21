@@ -17,27 +17,37 @@ class MCMovieTableViewCell: UITableViewCell {
     var movie: Movie! {
         didSet {
             self.movieTitle.text = movie.title
+            self.loadCover()
         }
     }
 
-    func setMovie(movie: Movie) {
+    func setMovie(_ movie: Movie) {
         self.movie = movie
     }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+
+    func loadCover() {
+        // Request the load of the current cover
+        MCtmdbAPI().request(endpoint: tmdbEndpoints.movie(id: String(self.movie.tmdb))).response { (response) in
+            if let error = response.error {
+                print(error)
+            }
+
+            if let data = response.data {
+                print(data)
+            }
+        }
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    func stopLoadingCover() {
+        // Stops the load of the current cover
 
-        // Configure the view for the selected state
+        self.coverImage.af_cancelImageRequest()
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.coverImage.af_cancelImageRequest()
+        self.stopLoadingCover()
     }
 
 }

@@ -51,6 +51,8 @@ final class MCDataLayer {
     private let documentFolder: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 
     fileprivate var movies: [Movie] = []
+    fileprivate var tmdbMovies: [TMDBMovie] = []
+
     fileprivate var tmdbConfiguration: TMDBConfiguration?
 
     fileprivate let traktAPI = MCTraktAPI()
@@ -72,10 +74,10 @@ final class MCDataLayer {
 
         switch structType {
 
-        case is Movie.Type:
-            guard let objects = NSKeyedUnarchiver.unarchiveObject(withFile: readingPath.path) as? [MCStructSerializer<Movie>] else { fatalError() }
-
-            self.movies = objects.map{ $0.structValue }
+        case is TMDBMovie.Type:
+            if let objects = NSKeyedUnarchiver.unarchiveObject(withFile: readingPath.path) as? [MCStructSerializer<TMDBMovie>] {
+                self.tmdbMovies = objects.map{ $0.structValue }
+            }
 
         case is Movie.Type:
             if let objects = NSKeyedUnarchiver.unarchiveObject(withFile: readingPath.path) as? [MCStructSerializer<Movie>] {
@@ -181,3 +183,4 @@ extension MCDataLayer {
     }
 
 }
+
