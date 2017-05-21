@@ -9,12 +9,13 @@
 import Foundation
 import Alamofire
 
-fileprivate enum tmdbEndpoints: Endpoint {
+enum tmdbEndpoints: Endpoint {
 
     static let baseURL = "https://api.themoviedb.org/3"
 
     case configuration()// = "/configuration"
     case movie(id: String)// = "/movie"
+    case movieImage(id: String)
 
     var path: String {
         switch self {
@@ -22,6 +23,8 @@ fileprivate enum tmdbEndpoints: Endpoint {
             return "/configuration"
         case .movie(let id):
             return "/movie/\(id)"
+        case .movieImage(let id):
+            return "/movie/\(id)/images"
         }
     }
 
