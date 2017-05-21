@@ -10,20 +10,43 @@ import UIKit
 
 class MCMovieListTableViewController: UITableViewController {
 
+
+    // MARK: Properties
+
+    var movies: [Movie] = [] {
+        didSet {
+            if movies.isEmpty {
+                self.tableView.isHidden = true
+            } else {
+                self.tableView.isHidden = false
+            }
+        }
+    }
+
+    var viewModel = MCMovieListViewModel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        self.title = "Trending Movies"
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        viewModel.readMoviesFromDataLayer { (success, movies) in
+            if success {
+                self.movies = movies
+                self.tableView.reloadData()
+            } else {
+                // Present an error
+                self.displayWhistleMessage("Couldn't load movies")
+            }
+        }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
     }
+
 
     // MARK: - Table view data source
 
@@ -36,11 +59,12 @@ class MCMovieListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.movieCell.identifier, for: indexPath) as? MCMovieTableViewCell else {
-            fatalError()
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.movieCell, for: indexPath) else {
+            fatalError("This tableView supports only MCMovieTableViewCell cells")
         }
 
-        cell.setMovie(movie: self.movies[indexPath.row])
+        cell.setMovie(self.movies[indexPath.row])
 
         return cell
     }
@@ -53,6 +77,4 @@ class MCMovieListTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
         
     }
-}
-
 }
