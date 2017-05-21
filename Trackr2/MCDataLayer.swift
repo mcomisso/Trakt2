@@ -72,17 +72,21 @@ final class MCDataLayer {
 
             self.movies = objects.map{ $0.structValue }
 
+        case is Movie.Type:
+            if let objects = NSKeyedUnarchiver.unarchiveObject(withFile: readingPath.path) as? [MCStructSerializer<Movie>] {
+                self.movies = objects.map{ $0.structValue }
+            }
 
         case is TMDBConfiguration.Type:
 
-            guard let objects = NSKeyedUnarchiver.unarchiveObject(withFile: readingPath.path) as? [MCStructSerializer<TMDBConfiguration>],
-                let configuration = objects.first else { fatalError() }
+            if let objects = NSKeyedUnarchiver.unarchiveObject(withFile: readingPath.path) as? [MCStructSerializer<TMDBConfiguration>],
+                let configuration = objects.first {
 
-            self.tmdbConfiguration = configuration.structValue
-
+                self.tmdbConfiguration = configuration.structValue
+            }
 
         default:
-            fatalError("Struct not implemented")
+            fatalError("Struct type not implemented")
         }
     }
 
