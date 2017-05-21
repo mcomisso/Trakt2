@@ -93,7 +93,18 @@ final class MCDataLayer {
 
     // Write to documents directory
 
-    private func save<T: SerializableStruct>(structs: [T]) throws {
+    fileprivate func save<T: SerializableStruct>(_ `struct`: T) throws {
+
+        let savePath = self.documentFolder.appendingPathComponent(String(describing: T.self))
+
+        let archiveData = `struct`.asDictionary
+        if !NSKeyedArchiver.archiveRootObject(archiveData, toFile: savePath.path ) {
+            throw SerializableError.saveFile
+        }
+    }
+
+
+    fileprivate func save<T: SerializableStruct>(_ structs: [T]) throws {
 
         let savePath = self.documentFolder.appendingPathComponent(String(describing: T.self))
 
@@ -102,6 +113,8 @@ final class MCDataLayer {
             throw SerializableError.saveFile
         }
     }
+}
+
 extension MCDataLayer {
 
 
