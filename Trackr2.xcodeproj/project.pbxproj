@@ -17,7 +17,7 @@
 		B9364BCB1ECE526000B5F7E0 /* MCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BCA1ECE526000B5F7E0 /* MCConstants.swift */; };
 		B9364BCD1ECE527700B5F7E0 /* UAObfuscatedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BCC1ECE527700B5F7E0 /* UAObfuscatedString.swift */; };
 		B9364BCF1ECEE25600B5F7E0 /* MCtmdbAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BCE1ECEE25500B5F7E0 /* MCtmdbAPI.swift */; };
-		B9364BD11ECEE26000B5F7E0 /* MCTrackrAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BD01ECEE26000B5F7E0 /* MCTrackrAPI.swift */; };
+		B9364BD11ECEE26000B5F7E0 /* MCTraktAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BD01ECEE26000B5F7E0 /* MCTraktAPI.swift */; };
 		B9364BD41ECEE27200B5F7E0 /* MCAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BD31ECEE27200B5F7E0 /* MCAPIProtocol.swift */; };
 		B9364BD71ECEF0C400B5F7E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9364BD51ECEF0C400B5F7E0 /* Main.storyboard */; };
 		B9364BDE1ECEF11800B5F7E0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9364BE01ECEF11800B5F7E0 /* Localizable.strings */; };
@@ -27,6 +27,7 @@
 		B9364BEC1ECF2C0B00B5F7E0 /* MCDataLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BEB1ECF2C0B00B5F7E0 /* MCDataLayer.swift */; };
 		B9364BF01ED057F600B5F7E0 /* MCMovieTableListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BEF1ED057F600B5F7E0 /* MCMovieTableListViewModel.swift */; };
 		B9364BF21ED097F600B5F7E0 /* MCMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BF11ED097F600B5F7E0 /* MCMovie.swift */; };
+		B991E7A31ED0B953008D5C0C /* MCWhisperWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B991E7A21ED0B953008D5C0C /* MCWhisperWrapper.swift */; };
 		E7B9030024B1137142794146 /* Pods_Trackr2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B96DABF381B834289AA7758 /* Pods_Trackr2.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,7 +60,7 @@
 		B9364BCA1ECE526000B5F7E0 /* MCConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCConstants.swift; sourceTree = "<group>"; };
 		B9364BCC1ECE527700B5F7E0 /* UAObfuscatedString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UAObfuscatedString.swift; sourceTree = "<group>"; };
 		B9364BCE1ECEE25500B5F7E0 /* MCtmdbAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCtmdbAPI.swift; sourceTree = "<group>"; };
-		B9364BD01ECEE26000B5F7E0 /* MCTrackrAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCTrackrAPI.swift; sourceTree = "<group>"; };
+		B9364BD01ECEE26000B5F7E0 /* MCTraktAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCTraktAPI.swift; sourceTree = "<group>"; };
 		B9364BD31ECEE27200B5F7E0 /* MCAPIProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCAPIProtocol.swift; sourceTree = "<group>"; };
 		B9364BD81ECEF0EC00B5F7E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B9364BD91ECEF0EC00B5F7E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -71,6 +72,7 @@
 		B9364BEB1ECF2C0B00B5F7E0 /* MCDataLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCDataLayer.swift; sourceTree = "<group>"; };
 		B9364BEF1ED057F600B5F7E0 /* MCMovieTableListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCMovieTableListViewModel.swift; sourceTree = "<group>"; };
 		B9364BF11ED097F600B5F7E0 /* MCMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCMovie.swift; sourceTree = "<group>"; };
+		B991E7A21ED0B953008D5C0C /* MCWhisperWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCWhisperWrapper.swift; sourceTree = "<group>"; };
 		E50B01694508FB889B84267E /* Pods_Trackr2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Trackr2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -128,10 +130,11 @@
 		B9364BA11ECE4FEB00B5F7E0 /* Trackr2 */ = {
 			isa = PBXGroup;
 			children = (
-				B9364BA21ECE4FEB00B5F7E0 /* AppDelegate.swift */,
-				B9364BD21ECEE26400B5F7E0 /* API */,
 				B9364BE21ECEF2C900B5F7E0 /* Lib */,
-				B9364BC91ECE521100B5F7E0 /* Initial screen */,
+				B9364BA21ECE4FEB00B5F7E0 /* AppDelegate.swift */,
+				B991E7A11ED0B93A008D5C0C /* Utils */,
+				B9364BD21ECEE26400B5F7E0 /* API */,
+				B991E7A51ED0BB21008D5C0C /* Views */,
 				B9364BC81ECE520B00B5F7E0 /* Model */,
 				B9364BCA1ECE526000B5F7E0 /* MCConstants.swift */,
 				B9364BA91ECE4FEB00B5F7E0 /* Assets.xcassets */,
@@ -162,15 +165,14 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		B9364BC91ECE521100B5F7E0 /* Initial screen */ = {
+		B9364BC91ECE521100B5F7E0 /* Trending */ = {
 			isa = PBXGroup;
 			children = (
 				B9364BEE1ED057E200B5F7E0 /* ViewModel */,
 				B9364BC21ECE514400B5F7E0 /* MCMovieTableViewCell.swift */,
 				B9364BC61ECE51A600B5F7E0 /* MCMovieListTableViewController.swift */,
-				B9364BE71ECEF57C00B5F7E0 /* MCDetailsViewController.swift */,
 			);
-			name = "Initial screen";
+			name = Trending;
 			sourceTree = "<group>";
 		};
 		B9364BD21ECEE26400B5F7E0 /* API */ = {
@@ -178,7 +180,7 @@
 			children = (
 				B9364BD31ECEE27200B5F7E0 /* MCAPIProtocol.swift */,
 				B9364BCE1ECEE25500B5F7E0 /* MCtmdbAPI.swift */,
-				B9364BD01ECEE26000B5F7E0 /* MCTrackrAPI.swift */,
+				B9364BD01ECEE26000B5F7E0 /* MCTraktAPI.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -197,6 +199,31 @@
 				B9364BEF1ED057F600B5F7E0 /* MCMovieTableListViewModel.swift */,
 			);
 			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		B991E7A11ED0B93A008D5C0C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				B991E7A21ED0B953008D5C0C /* MCWhisperWrapper.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		B991E7A41ED0BB1C008D5C0C /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				B9364BE71ECEF57C00B5F7E0 /* MCDetailsViewController.swift */,
+			);
+			name = Details;
+			sourceTree = "<group>";
+		};
+		B991E7A51ED0BB21008D5C0C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B9364BC91ECE521100B5F7E0 /* Trending */,
+				B991E7A41ED0BB1C008D5C0C /* Details */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		E472AE3EAB385ABCF79E5E86 /* Pods */ = {
@@ -437,7 +464,8 @@
 				B9364BC51ECE515F00B5F7E0 /* MCModel.swift in Sources */,
 				B9364BCF1ECEE25600B5F7E0 /* MCtmdbAPI.swift in Sources */,
 				B9364BCB1ECE526000B5F7E0 /* MCConstants.swift in Sources */,
-				B9364BD11ECEE26000B5F7E0 /* MCTrackrAPI.swift in Sources */,
+				B991E7A31ED0B953008D5C0C /* MCWhisperWrapper.swift in Sources */,
+				B9364BD11ECEE26000B5F7E0 /* MCTraktAPI.swift in Sources */,
 				B9364BA31ECE4FEB00B5F7E0 /* AppDelegate.swift in Sources */,
 				B9364BE61ECEF55400B5F7E0 /* R.generated.swift in Sources */,
 				B9364BF01ED057F600B5F7E0 /* MCMovieTableListViewModel.swift in Sources */,
