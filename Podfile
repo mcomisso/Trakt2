@@ -13,7 +13,7 @@ target 'Trackr2' do
   pod 'Whisper'
 
   pod 'R.swift'
-
+  pod 'RealmSwift'
   target 'Trackr2Tests' do
     inherit! :search_paths
     # Pods for testing
