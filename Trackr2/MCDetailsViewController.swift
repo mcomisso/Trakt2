@@ -91,6 +91,53 @@ final class MCDetailsViewController: UIViewController {
 
     func setMovie(_ movie: Movie) {
         self.movie = movie
+
+        MCNetworkLayer.fetchDetailsForMovie(movie: self.movie) { [weak self] (success, result) in
+            if success {
+                if let details = result as? MovieDetailedMDB,
+                    let conf = UserDefaults.standard.read(structType: ConfigurationMDB.self) as? ConfigurationMDB {
+                    self?.titleLabel.text = details.title
+
+                    // Set image
+
+                    if let poster = details.poster_path {
+                        let url = conf.generatePosterUrl(secure: true).appendingPathComponent(poster)
+
+                        UIView.animate(withDuration: 0.4, animations: { 
+                            self?.coverImage.af_setImage(withURL: url)
+                            self?.backgroundImageView.af_setImage(withURL: url)
+                        })
+                    }
+
+                    self?.taglineLabel.text = details.tagline
+
+                    // Set genres
+
+                    var descriptionString: String = ""
+                    descriptionString.append(details.genres.map { $0.name }.reduce("\nGenres: ", { $1 != nil ? $0 + " " + $1! : $0 }))
+
+                    let flatVars: [String] = Mirror(reflecting: details).children.flatMap {
+
+                        if let label = $0.label,
+                            let value = $0.value as? String {
+                            return "\n\(String(describing: label)): \(value)"
+                        }
+                        return nil
+                        }
+
+                    flatVars.forEach { descriptionString.append($0) }
+
+                    self?.detailsTextLabel.text = descriptionString
+                }
+            } else {
+                if let error = result as? String {
+                    self?.displayWhistleMessage(error)
+                }
+            }
+        }
+
+
+
     }
 
     
