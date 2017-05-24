@@ -17,6 +17,12 @@ class MCMovieTableViewCell: UITableViewCell {
     var movie: Movie! {
         didSet {
             self.movieTitle.text = movie.title
+
+            MCNetworkLayer.fetchImageForMovie(movie: movie, dimension: .small) { (success, url) in
+                if let url = url as? URL {
+                    self.coverImage.af_setImage(withURL: url)
+                }
+            }
         }
     }
 
