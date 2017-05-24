@@ -42,7 +42,7 @@ final class MCTraktAPI: MCAPI {
     public init() {
         var defaultHeaders = Alamofire.SessionManager.defaultHTTPHeaders
         defaultHeaders["trakt-api-version"] = "2"
-        defaultHeaders["trakt-api-key"] = MCConstants.API.clientID
+        defaultHeaders["trakt-api-key"] = MCConstants.TraktAPI.clientID
         defaultHeaders["Content-type"] = "application/json"
 
         let conf = URLSessionConfiguration.default
