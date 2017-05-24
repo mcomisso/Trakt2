@@ -9,22 +9,29 @@
 import Foundation
 import Alamofire
 
-enum MCTrackrEndpoint: URLRequestConvertible {
+final class MCTraktAPI: MCAPI {
 
-    // Enumeration of cases
-    case trendingMovies()
+    // Endpoints
 
-    private var path: String {
-        switch self {
-        case .trendingMovies:
-            return "/movies/trending"
+    enum MCTracktEndpoint: Endpoint {
+
+        static let baseURL = MCConstants.baseURLs.production
+
+        // Enumeration of cases
+        case trendingMovies
+
+        private var path: String {
+            switch self {
+            case .trendingMovies:
+                return "/movies/trending"
+            }
         }
-    }
 
-    static let baseURL = MCConstants.baseURLs.production
-
-    func asURLRequest() throws -> URLRequest {
-        let requestURL = try MCTrackrEndpoint.baseURL.asURL().appendingPathComponent(path)
+        var isReachable: Bool {
+            get {
+                return NetworkReachabilityManager(host: MCTracktEndpoint.baseURL)?.isReachable ?? false
+            }
+        }
 
         func asURLRequest() throws -> URLRequest {
             let requestURL = try MCTracktEndpoint.baseURL.asURL().appendingPathComponent(path)
@@ -36,9 +43,7 @@ enum MCTrackrEndpoint: URLRequestConvertible {
             return URLRequest(url: url)
         }
     }
-}
 
-final class MCTraktAPI: MCAPI {
 
     let sessionManager: SessionManager
 
@@ -53,10 +58,22 @@ final class MCTraktAPI: MCAPI {
         self.sessionManager = Alamofire.SessionManager(configuration: conf)
     }
 
-    func request(endpoint: URLRequestConvertible) -> DataRequest {
-        let urlReq = try! endpoint.asURLRequest()
+    func request(endpoint: Endpoint) -> DataRequest {
+        var urlReq = try! endpoint.asURLRequest()
+
+        if endpoint.isReachable {
+            urlReq.cachePolicy = .reloadIgnoringLocalCacheData
+        } else {
+            urlReq.cachePolicy = .returnCacheDataDontLoad
+        }
 
         return self.sessionManager.request(urlReq)
     }
+}
 
+// Wrappers
+extension MCTraktAPI {
+    func fetchTrendingMovies() -> DataRequest {
+        return self.request(endpoint: MCTracktEndpoint.trendingMovies)
+    }
 }
