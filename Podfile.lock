@@ -6,12 +6,16 @@ PODS:
     - R.swift.Library (~> 3.0.2)
   - R.swift.Library (3.0.2)
   - SwiftyJSON (3.1.4)
+  - TMDBSwift (0.3.0)
+  - Whisper (5.0.0)
 
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage
   - R.swift
   - SwiftyJSON
+  - TMDBSwift
+  - Whisper
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
@@ -19,7 +23,9 @@ SPEC CHECKSUMS:
   R.swift: 207a372a2b5977caef440c696a368009460641d1
   R.swift.Library: fbdec16c9802ad104fc1ba53415dc190e6ec5c73
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  TMDBSwift: 47fe9253d0b9bbad8120a6378da2162c8d428bab
+  Whisper: 051f25e704bf8992641ffd28b20d5682ddc5f5d3
 
-PODFILE CHECKSUM: 8e8c2574d87b9546ee1c888c973ee6cf0ad607ca
+PODFILE CHECKSUM: 5883d1ccda013ade51fbf4dff889f0f53a37247c
 
 COCOAPODS: 1.2.1
