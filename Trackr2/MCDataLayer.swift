@@ -35,40 +35,26 @@ final class MCDataLayer {
 
 }
 
+
 extension MCDataLayer {
 
-
-    func listDetailsForMovie(movie: Movie, completion: (Bool, TMDBMovie)->Void) {
-
-    }
-
-    func listMovies(completion: @escaping MovieCompletion)  {
+    /// Requests the movies to
+    ///
+    /// - Parameter completion: Completion with movies
+    func listMovies(completion: @escaping MovieCompletion) {
 
         if self.movies.isEmpty {
-            // Network request
-
-            self.traktAPI.request(endpoint: MCTrackrEndpoint.trendingMovies()).response { [weak self] resp in
-                guard let strongSelf = self else { return }
-
-                if let error = resp.error {
-                    print(error.localizedDescription)
-                    completion(false, [])
+            self.networkLayer.fetchMovies { (success, data: Any?) in
+                if success {
+                    guard let movies = data as? [Movie] else { return }
+                    self.movies = movies
+                    completion(true, movies)
                 } else {
-                    if let data = resp.data {
-                        let json = JSON(data: data)
-                        for movieJSON in json.arrayValue {
-                            let movie = try! Movie(json: movieJSON)
-                            strongSelf.movies.append(movie)
-                        }
-
-                        completion(true, strongSelf.movies)
-                        try! strongSelf.save(strongSelf.movies)
-                    }
+                    completion(false, [])
                 }
             }
-
         } else {
-            completion(true, self.movies)
+            completion(true, movies)
         }
     }
 }
