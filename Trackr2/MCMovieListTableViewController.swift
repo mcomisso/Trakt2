@@ -11,15 +11,21 @@ import UIKit
 class MCMovieListTableViewController: UITableViewController {
 
 
+    lazy var feedbackLabel: UILabel = {
+        let label = UILabel()
+
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Loading... 🎬"
+        label.textAlignment = .center
+        label.sizeToFit()
+        return label
+    }()
+
     // MARK: Properties
 
     var movies: [Movie] = [] {
         didSet {
-            if movies.isEmpty {
-                self.tableView.isHidden = true
-            } else {
-                self.tableView.isHidden = false
-            }
+            self.feedbackLabel.isHidden = !movies.isEmpty
         }
     }
 
@@ -30,6 +36,13 @@ class MCMovieListTableViewController: UITableViewController {
 
         self.title = "Trending Movies"
 
+        self.view.addSubview(self.feedbackLabel)
+
+        NSLayoutConstraint.activate([self.feedbackLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                                     self.feedbackLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+                                     self.feedbackLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+                                     self.feedbackLabel.heightAnchor.constraint(equalToConstant: 60)])
+
         viewModel.readMoviesFromDataLayer { (success, movies) in
             if success {
                 self.movies = movies
@@ -39,12 +52,6 @@ class MCMovieListTableViewController: UITableViewController {
                 self.displayWhistleMessage("Couldn't load movies")
             }
         }
-    }
-
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
     }
 
 
@@ -64,17 +71,25 @@ class MCMovieListTableViewController: UITableViewController {
             fatalError("This tableView supports only MCMovieTableViewCell cells")
         }
 
-        cell.setMovie(self.movies[indexPath.row])
+        cell.setMovie(movie: self.movies[indexPath.row])
 
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 126
+    }
 
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
+
+        if segue.identifier == R.segue.mCMovieListTableViewController.detailsSegue.identifier {
+            if let vc = segue.destination as? MCDetailsViewController,
+                let indexPath = self.tableView.indexPathForSelectedRow {
+                vc.setMovie(self.movies[indexPath.row])
+            }
+        }
+
     }
 }
