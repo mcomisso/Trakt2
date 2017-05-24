@@ -17,6 +17,12 @@ class MCMovieTableViewCell: UITableViewCell {
     var movie: Movie! {
         didSet {
             self.movieTitle.text = movie.title
+
+            MCNetworkLayer.fetchImageForMovie(movie: movie, dimension: .small) { (success, url) in
+                if let url = url as? URL {
+                    self.coverImage.af_setImage(withURL: url)
+                }
+            }
         }
     }
 
@@ -29,14 +35,10 @@ class MCMovieTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
     override func prepareForReuse() {
         super.prepareForReuse()
+        self.coverImage.image = nil
+        self.movieTitle.text = nil
         self.coverImage.af_cancelImageRequest()
     }
 

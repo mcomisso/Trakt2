@@ -6,5 +6,7 @@
 	<string>https://api-staging.trakt.tv</string>
 	<key>baseURL-production</key>
 	<string>https://api.trakt.tv</string>
+	<key>tmdbURL</key>
+	<string>https://api.themoviedb.org/3</string>
 </dict>
 </plist>

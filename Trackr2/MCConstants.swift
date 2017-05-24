@@ -9,7 +9,7 @@
 import Foundation
 
 struct MCConstants {
-    struct API {
+    struct TraktAPI {
         // Strings are obfuscated with UAObfuscatedString. Static analysis of binary is harder.
 
         // Client ID
@@ -21,9 +21,15 @@ struct MCConstants {
         static let clientSecret = "".a.c.a.c._2.f._8._9._8._4.e.f.f._1._2._6.f._3._9.d._2.a.a._5._3.c.e._0._8._3._6._6._7._3._3.f.d.a._1._0._1._3.c.c._6.e._5.e._0._9._6._9._9.d.a.d.b.b.a.b._5._1._7.f
     }
 
+    struct TMDBAPI {
+        static let apiKey = "".c._8._8.f._5.d.e.c.b.e._1.d._6._4.c.c._2._7._6._8._5.a.c._5._0._9._0._4._4._3._7._6
+    }
+
     struct baseURLs {
-        static let staging = stringForKey("baseURL-staging", plist: "Trackr")
-        static let production = stringForKey("baseURL-production", plist: "Trackr")
+        static let staging = stringForKey("baseURL-staging", plist: "Trackt")
+        static let production = stringForKey("baseURL-production", plist: "Trackt")
+
+        static let tmdb = stringForKey("tmdbURL", plist: "Trackt")
     }
 
 }

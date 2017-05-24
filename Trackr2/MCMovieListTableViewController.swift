@@ -10,20 +10,50 @@ import UIKit
 
 class MCMovieListTableViewController: UITableViewController {
 
+
+    lazy var feedbackLabel: UILabel = {
+        let label = UILabel()
+
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Loading... 🎬"
+        label.textAlignment = .center
+        label.sizeToFit()
+        return label
+    }()
+
+    // MARK: Properties
+
+    var movies: [Movie] = [] {
+        didSet {
+            self.feedbackLabel.isHidden = !movies.isEmpty
+        }
+    }
+
+    var viewModel = MCMovieListViewModel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        self.title = "Trending Movies"
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.view.addSubview(self.feedbackLabel)
+
+        NSLayoutConstraint.activate([self.feedbackLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                                     self.feedbackLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+                                     self.feedbackLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+                                     self.feedbackLabel.heightAnchor.constraint(equalToConstant: 60)])
+
+        viewModel.readMoviesFromDataLayer { (success, movies) in
+            if success {
+                self.movies = movies
+                self.tableView.reloadData()
+            } else {
+                // Present an error
+                self.displayWhistleMessage("Couldn't load movies")
+            }
+        }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     // MARK: - Table view data source
 
@@ -36,8 +66,9 @@ class MCMovieListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.movieCell.identifier, for: indexPath) as? MCMovieTableViewCell else {
-            fatalError()
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.movieCell, for: indexPath) else {
+            fatalError("This tableView supports only MCMovieTableViewCell cells")
         }
 
         cell.setMovie(movie: self.movies[indexPath.row])
@@ -45,14 +76,20 @@ class MCMovieListTableViewController: UITableViewController {
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 126
+    }
 
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
-    }
-}
 
+        if segue.identifier == R.segue.mCMovieListTableViewController.detailsSegue.identifier {
+            if let vc = segue.destination as? MCDetailsViewController,
+                let indexPath = self.tableView.indexPathForSelectedRow {
+                vc.setMovie(self.movies[indexPath.row])
+            }
+        }
+
+    }
 }

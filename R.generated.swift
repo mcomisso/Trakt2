@@ -23,12 +23,12 @@ struct R: Rswift.Validatable {
   
   /// This `R.file` struct is generated, and contains static references to 1 files.
   struct file {
-    /// Resource file `Trackr.plist`.
-    static let trackrPlist = Rswift.FileResource(bundle: R.hostingBundle, name: "Trackr", pathExtension: "plist")
+    /// Resource file `Trackt.plist`.
+    static let tracktPlist = Rswift.FileResource(bundle: R.hostingBundle, name: "Trackt", pathExtension: "plist")
     
-    /// `bundle.url(forResource: "Trackr", withExtension: "plist")`
-    static func trackrPlist(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.trackrPlist
+    /// `bundle.url(forResource: "Trackt", withExtension: "plist")`
+    static func tracktPlist(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.tracktPlist
       return fileResource.bundle.url(forResource: fileResource)
     }
     
@@ -63,12 +63,12 @@ struct R: Rswift.Validatable {
     /// This struct is generated for `MCMovieListTableViewController`, and contains static references to 1 segues.
     struct mCMovieListTableViewController {
       /// Segue identifier `detailsSegue`.
-      static let detailsSegue: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, MCMovieListTableViewController, UIKit.UIViewController> = Rswift.StoryboardSegueIdentifier(identifier: "detailsSegue")
+      static let detailsSegue: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, MCMovieListTableViewController, MCDetailsViewController> = Rswift.StoryboardSegueIdentifier(identifier: "detailsSegue")
       
       /// Optionally returns a typed version of segue `detailsSegue`.
       /// Returns nil if either the segue identifier, the source, destination, or segue types don't match.
       /// For use inside `prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)`.
-      static func detailsSegue(segue: UIKit.UIStoryboardSegue) -> Rswift.TypedStoryboardSegueInfo<UIKit.UIStoryboardSegue, MCMovieListTableViewController, UIKit.UIViewController>? {
+      static func detailsSegue(segue: UIKit.UIStoryboardSegue) -> Rswift.TypedStoryboardSegueInfo<UIKit.UIStoryboardSegue, MCMovieListTableViewController, MCDetailsViewController>? {
         return Rswift.TypedStoryboardSegueInfo(segueIdentifier: R.segue.mCMovieListTableViewController.detailsSegue, segue: segue)
       }
       

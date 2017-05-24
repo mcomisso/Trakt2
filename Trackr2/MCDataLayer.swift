@@ -7,36 +7,14 @@
 //
 
 import Foundation
+import SwiftyJSON
 
-typealias StandardDict = [String: Any]
+
+typealias MovieCompletion = (Bool, [Movie]) -> Void
+typealias Completion = (Bool, Any?) -> Void
 
 enum SerializableError: Error {
     case saveFile
-}
-
-protocol SerializableStruct {
-    var asDictionary: StandardDict { get }
-    init(data: StandardDict)
-}
-
-
-/// This class serializes structs to allow NSCoding saving in plist files.
-final class MCStructSerializer<T: SerializableStruct>: NSObject, NSCoding {
-
-    var structValue: T
-
-    init(structValue: T) {
-        self.structValue = structValue
-    }
-
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.structValue.asDictionary, forKey: String(describing: T.self))
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        let data = aDecoder.decodeObject(forKey: String(describing: T.self)) as! StandardDict
-        self.structValue = T(data: data)
-    }
 }
 
 
@@ -45,66 +23,38 @@ final class MCDataLayer {
     // MARK: Private variables
     private let documentFolder: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 
-    private var movies: [Movie] = []
+    fileprivate var moviesIndex: [Int] = []
 
-    private var tmdbConfiguration: TMDBConfiguration!
+    fileprivate var movies: [Movie] = []
+
+    fileprivate let networkLayer = MCNetworkLayer()
 
     // MARK: Initializers
 
-    init() {
-        self.read(structType: Movie.self)
-    }
+    init() { }
+
+}
 
 
-    // Read from documents directory
+extension MCDataLayer {
 
-    private func read<T: SerializableStruct>(structType: T.Type) {
+    /// Requests the movies to
+    ///
+    /// - Parameter completion: Completion with movies
+    func listMovies(completion: @escaping MovieCompletion) {
 
-        let readingPath = self.documentFolder.appendingPathComponent(String(describing: T.self))
-
-
-        switch structType {
-
-        case is Movie.Type:
-            guard let objects = NSKeyedUnarchiver.unarchiveObject(withFile: readingPath.path) as? [MCStructSerializer<Movie>] else { fatalError() }
-
-            self.movies = objects.map{ $0.structValue }
-
-
-        case is TMDBConfiguration.Type:
-
-            guard let objects = NSKeyedUnarchiver.unarchiveObject(withFile: readingPath.path) as? [MCStructSerializer<TMDBConfiguration>],
-                let configuration = objects.first else { fatalError() }
-
-            self.tmdbConfiguration = configuration.structValue
-
-
-        default:
-            fatalError("Struct not implemented")
+        if self.movies.isEmpty {
+            self.networkLayer.fetchMovies { (success, data: Any?) in
+                if success {
+                    guard let movies = data as? [Movie] else { return }
+                    self.movies = movies
+                    completion(true, movies)
+                } else {
+                    completion(false, [])
+                }
+            }
+        } else {
+            completion(true, movies)
         }
     }
-
-
-    // Write to documents directory
-
-    private func save<T: SerializableStruct>(structs: [T]) throws {
-
-        let savePath = self.documentFolder.appendingPathComponent(String(describing: T.self))
-
-        let archiveData = structs.map{ $0.asDictionary }
-        if !NSKeyedArchiver.archiveRootObject(archiveData, toFile: savePath.path ) {
-            throw SerializableError.saveFile
-        }
-    }
-
-
-    func listMovies() -> [Movie] {
-        return self.movies
-    }
-
-
-    public func readTMDBConfiguration() -> TMDBConfiguration {
-        return self.tmdbConfiguration
-    }
-
 }
