@@ -26,12 +26,15 @@ enum MCTrackrEndpoint: URLRequestConvertible {
     func asURLRequest() throws -> URLRequest {
         let requestURL = try MCTrackrEndpoint.baseURL.asURL().appendingPathComponent(path)
 
-        var urlcomponents = URLComponents(string: requestURL.absoluteString)
-        urlcomponents?.queryItems = [URLQueryItem(name: "limit", value: "100")]
+        func asURLRequest() throws -> URLRequest {
+            let requestURL = try MCTracktEndpoint.baseURL.asURL().appendingPathComponent(path)
 
+            var urlcomponents = URLComponents(string: requestURL.absoluteString)
+            urlcomponents?.queryItems = [URLQueryItem(name: "limit", value: "100")]
 
-        guard let url = try! urlcomponents?.asURL() else { fatalError() }
-        return URLRequest(url: url)
+            guard let url = try! urlcomponents?.asURL() else { fatalError() }
+            return URLRequest(url: url)
+        }
     }
 }
 
