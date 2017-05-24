@@ -1,5 +1,5 @@
 //
-//  MCtmdbAPI.swift
+//  MCTMDBAPI.swift
 //  Trackr2
 //
 //  Created by Matteo Comisso on 19/05/2017.
@@ -9,32 +9,46 @@
 import Foundation
 import Alamofire
 
-fileprivate enum tmdbEndpoints: Endpoint {
 
-    static let baseURL = "https://api.themoviedb.org/3"
+final class MCTMDBAPI: MCAPI {
 
-    case configuration()// = "/configuration"
-    case movie(id: String)// = "/movie"
+    // MARK: Endpoints
 
-    var path: String {
-        switch self {
-        case .configuration:
-            return "/configuration"
-        case .movie(let id):
-            return "/movie/\(id)"
+    enum TMDBEndpoints: Endpoint {
+
+        static let baseURL = MCConstants.baseURLs.tmdb
+
+        case configuration// = "/configuration"
+        case movie(id: Int)// = "/movie/34576"
+        case movieImage(id: Int) // = "/movie/34576/images"
+
+        var isReachable: Bool {
+            get {
+                return NetworkReachabilityManager(host: TMDBEndpoints.baseURL)?.isReachable ?? false
+            }
+        }
+
+        var path: String {
+            switch self {
+            case .configuration:
+                return "/configuration"
+            case .movie(let id):
+                return "/movie/\(id)"
+            case .movieImage(let id):
+                return "/movie/\(id)/images"
+            }
+        }
+
+        func asURLRequest() throws -> URLRequest {
+            let baseURL = try TMDBEndpoints.baseURL.asURL()
+            return URLRequest(url: baseURL.appendingPathComponent(path))
         }
     }
 
-    func asURLRequest() throws -> URLRequest {
-        let baseURL = try tmdbEndpoints.baseURL.asURL()
-        return URLRequest(url: baseURL.appendingPathComponent(path))
-    }
-}
+    // MARK: Private Vars
 
-final class MCtmdbAPI: MCAPI {
-
-    private let apiKey = "".c._8._8.f._5.d.e.c.b.e._1.d._6._4.c.c._2._7._6._8._5.a.c._5._0._9._0._4._4._3._7._6
-
+    private let apiKey = MCConstants.TMDBAPI.apiKey
+    
     var sessionManager: SessionManager {
         get {
             return Alamofire.SessionManager.default
@@ -47,6 +61,24 @@ final class MCtmdbAPI: MCAPI {
         var urlReq = try! endpoint.asURLRequest()
         urlReq = try! URLEncoding.default.encode(urlReq, with: defaultParameters)
 
+        if endpoint.isReachable {
+            urlReq.cachePolicy = .reloadIgnoringLocalCacheData
+        } else {
+            urlReq.cachePolicy = .returnCacheDataDontLoad
+        }
+
         return self.sessionManager.request(urlReq)
+    }
+
+}
+
+extension MCTMDBAPI {
+
+    func fetchImageForMovie(movie: Movie) -> DataRequest {
+        return self.request(endpoint: TMDBEndpoints.movie(id: movie.tmdb))
+    }
+
+    func fetchConfiguration() -> DataRequest {
+        return self.request(endpoint: TMDBEndpoints.configuration)
     }
 }

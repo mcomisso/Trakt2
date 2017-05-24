@@ -10,8 +10,10 @@ target 'Trackr2' do
   pod 'AlamofireImage'
   
   pod 'SwiftyJSON'
+  pod 'Whisper'
 
   pod 'R.swift'
+  pod 'TMDBSwift'
 
   target 'Trackr2Tests' do
     inherit! :search_paths

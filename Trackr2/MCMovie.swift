@@ -9,7 +9,8 @@
 import Foundation
 import SwiftyJSON
 
-struct Movie: SerializableStruct {
+
+final class Movie: Equatable {
     let title: String
     let year: Int
     let trakt: Int
@@ -17,7 +18,13 @@ struct Movie: SerializableStruct {
     let imdb: String
     let tmdb: Int
 
-    var coverURL: String
+    // MARK: Equatable
+
+    static func ==(lhs: Movie, rhs: Movie) -> Bool {
+        return lhs.imdb == rhs.imdb
+    }
+
+    // MARK: Initialization
 
     init(json: JSON) throws {
 
@@ -31,11 +38,6 @@ struct Movie: SerializableStruct {
         self.imdb = movie["ids"]["imdb"].stringValue
         self.tmdb = movie["ids"]["tmdb"].intValue
 
-        self.coverURL = ""
-    }
-
-    mutating func setCoverURL(_ coverURL: String) {
-        self.coverURL = coverURL
     }
 
     // MARK: SerializableStruct
@@ -46,8 +48,8 @@ struct Movie: SerializableStruct {
             let trakt = data["trakt"] as? Int,
             let slug = data["slug"] as? String,
             let imdb = data["imdb"] as? String,
-            let tmdb = data["tmdb"] as? Int,
-            let coverURL = data["coverUrl"] as? String else { fatalError() }
+            let tmdb = data["tmdb"] as? Int
+            else { fatalError() }
 
         self.title = title
         self.year = year
@@ -55,8 +57,6 @@ struct Movie: SerializableStruct {
         self.slug = slug
         self.imdb = imdb
         self.tmdb = tmdb
-
-        self.coverURL = coverURL
     }
 
     var asDictionary: StandardDict {
@@ -67,31 +67,8 @@ struct Movie: SerializableStruct {
                 "trakt": self.trakt,
                 "slug": self.slug,
                 "imdb": self.imdb,
-                "tmdb": self.tmdb,
-                "coverUrl": self.coverURL
+                "tmdb": self.tmdb
             ]
         }
     }
-}
-
-
-
-struct Person {
-    let name: String
-    let traktId: Int
-    let slug: String
-    let imdb: String
-    let tmdb: Int
-    let tvrage: Int
-
-    init(json: JSON) {
-        self.name = json["name"].stringValue
-        self.traktId = json["ids"]["trakt"].intValue
-        self.slug = json["ids"]["slug"].stringValue
-
-        self.imdb   = json["ids"]["imdb"].stringValue
-        self.tmdb   = json["ids"]["tmdb"].intValue
-        self.tvrage = json["ids"]["tvrage"].intValue
-    }
-    
 }
