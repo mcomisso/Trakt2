@@ -23,74 +23,16 @@ final class MCDataLayer {
     // MARK: Private variables
     private let documentFolder: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 
-    fileprivate var movies: [Movie] = []
-    fileprivate var tmdbConfiguration: TMDBConfiguration?
+    fileprivate var moviesIndex: [Int] = []
 
-    fileprivate let traktAPI = MCTraktAPI()
+    fileprivate var movies: [Movie] = []
+
+    fileprivate let networkLayer = MCNetworkLayer()
 
     // MARK: Initializers
 
-    init() {
-        self.read(structType: Movie.self)
-        self.read(structType: TMDBConfiguration.self)
-    }
+    init() { }
 
-
-    // Read from documents directory
-
-    fileprivate func read<T: SerializableStruct>(structType: T.Type) {
-
-        let readingPath = self.documentFolder.appendingPathComponent(String(describing: T.self))
-
-
-        switch structType {
-
-        case is Movie.Type:
-            guard let objects = NSKeyedUnarchiver.unarchiveObject(withFile: readingPath.path) as? [MCStructSerializer<Movie>] else { fatalError() }
-
-            self.movies = objects.map{ $0.structValue }
-
-        case is Movie.Type:
-            if let objects = NSKeyedUnarchiver.unarchiveObject(withFile: readingPath.path) as? [MCStructSerializer<Movie>] {
-                self.movies = objects.map{ $0.structValue }
-            }
-
-        case is TMDBConfiguration.Type:
-
-            if let objects = NSKeyedUnarchiver.unarchiveObject(withFile: readingPath.path) as? [MCStructSerializer<TMDBConfiguration>],
-                let configuration = objects.first {
-
-                self.tmdbConfiguration = configuration.structValue
-            }
-
-        default:
-            fatalError("Struct type not implemented")
-        }
-    }
-
-
-    // Write to documents directory
-
-    fileprivate func save<T: SerializableStruct>(_ `struct`: T) throws {
-
-        let savePath = self.documentFolder.appendingPathComponent(String(describing: T.self))
-
-        let archiveData = `struct`.asDictionary
-        if !NSKeyedArchiver.archiveRootObject(archiveData, toFile: savePath.path ) {
-            throw SerializableError.saveFile
-        }
-    }
-
-
-    fileprivate func save<T: SerializableStruct>(_ structs: [T]) throws {
-
-        let savePath = self.documentFolder.appendingPathComponent(String(describing: T.self))
-
-        let archiveData = structs.map{ $0.asDictionary }
-        if !NSKeyedArchiver.archiveRootObject(archiveData, toFile: savePath.path ) {
-            throw SerializableError.saveFile
-        }
-    }
 }
 
 extension MCDataLayer {
