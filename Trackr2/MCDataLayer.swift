@@ -13,35 +13,8 @@ import SwiftyJSON
 typealias MovieCompletion = (Bool, [Movie]) -> Void
 typealias Completion = (Bool, Any?) -> Void
 
-typealias StandardDict = [String: Any]
-
 enum SerializableError: Error {
     case saveFile
-}
-
-protocol SerializableStruct {
-    var asDictionary: StandardDict { get }
-    init(data: StandardDict)
-}
-
-
-/// This class serializes structs to allow NSCoding saving in plist files.
-final class MCStructSerializer<T: SerializableStruct>: NSObject, NSCoding {
-
-    var structValue: T
-
-    init(structValue: T) {
-        self.structValue = structValue
-    }
-
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.structValue.asDictionary, forKey: String(describing: T.self))
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        let data = aDecoder.decodeObject(forKey: String(describing: T.self)) as! StandardDict
-        self.structValue = T(data: data)
-    }
 }
 
 
