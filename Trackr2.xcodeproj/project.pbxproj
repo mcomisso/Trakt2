@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		570C3ECEAF693A34E073BA72 /* Pods_Trackr2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E50B01694508FB889B84267E /* Pods_Trackr2Tests.framework */; };
+		B91B1DF41ED25DFA001CCDF1 /* MCNetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91B1DF31ED25DFA001CCDF1 /* MCNetworkLayer.swift */; };
+		B91B1DF61ED26554001CCDF1 /* MCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91B1DF51ED26554001CCDF1 /* MCExtensions.swift */; };
 		B9364BA31ECE4FEB00B5F7E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BA21ECE4FEB00B5F7E0 /* AppDelegate.swift */; };
 		B9364BAA1ECE4FEB00B5F7E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9364BA91ECE4FEB00B5F7E0 /* Assets.xcassets */; };
 		B9364BB81ECE4FEB00B5F7E0 /* Trackr2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BB71ECE4FEB00B5F7E0 /* Trackr2Tests.swift */; };
@@ -16,17 +18,17 @@
 		B9364BC71ECE51A600B5F7E0 /* MCMovieListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BC61ECE51A600B5F7E0 /* MCMovieListTableViewController.swift */; };
 		B9364BCB1ECE526000B5F7E0 /* MCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BCA1ECE526000B5F7E0 /* MCConstants.swift */; };
 		B9364BCD1ECE527700B5F7E0 /* UAObfuscatedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BCC1ECE527700B5F7E0 /* UAObfuscatedString.swift */; };
-		B9364BCF1ECEE25600B5F7E0 /* MCtmdbAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BCE1ECEE25500B5F7E0 /* MCtmdbAPI.swift */; };
 		B9364BD11ECEE26000B5F7E0 /* MCTraktAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BD01ECEE26000B5F7E0 /* MCTraktAPI.swift */; };
 		B9364BD41ECEE27200B5F7E0 /* MCAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BD31ECEE27200B5F7E0 /* MCAPIProtocol.swift */; };
 		B9364BD71ECEF0C400B5F7E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9364BD51ECEF0C400B5F7E0 /* Main.storyboard */; };
 		B9364BDE1ECEF11800B5F7E0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9364BE01ECEF11800B5F7E0 /* Localizable.strings */; };
 		B9364BE61ECEF55400B5F7E0 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BE51ECEF55400B5F7E0 /* R.generated.swift */; };
 		B9364BE81ECEF57C00B5F7E0 /* MCDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BE71ECEF57C00B5F7E0 /* MCDetailsViewController.swift */; };
-		B9364BEA1ECF082600B5F7E0 /* Trackr.plist in Resources */ = {isa = PBXBuildFile; fileRef = B9364BE91ECF082600B5F7E0 /* Trackr.plist */; };
+		B9364BEA1ECF082600B5F7E0 /* Trackt.plist in Resources */ = {isa = PBXBuildFile; fileRef = B9364BE91ECF082600B5F7E0 /* Trackt.plist */; };
 		B9364BEC1ECF2C0B00B5F7E0 /* MCDataLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BEB1ECF2C0B00B5F7E0 /* MCDataLayer.swift */; };
 		B9364BF01ED057F600B5F7E0 /* MCMovieTableListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BEF1ED057F600B5F7E0 /* MCMovieTableListViewModel.swift */; };
 		B9364BF21ED097F600B5F7E0 /* MCMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9364BF11ED097F600B5F7E0 /* MCMovie.swift */; };
+		B97E70F91ED4D1B900EE3DD1 /* MCSerializableStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97E70F81ED4D1B900EE3DD1 /* MCSerializableStruct.swift */; };
 		B991E7A31ED0B953008D5C0C /* MCWhisperWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B991E7A21ED0B953008D5C0C /* MCWhisperWrapper.swift */; };
 		E7B9030024B1137142794146 /* Pods_Trackr2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B96DABF381B834289AA7758 /* Pods_Trackr2.framework */; };
 /* End PBXBuildFile section */
@@ -47,6 +49,8 @@
 		1DE063470B8B6483D1DFE935 /* Pods-Trackr2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trackr2.release.xcconfig"; path = "Pods/Target Support Files/Pods-Trackr2/Pods-Trackr2.release.xcconfig"; sourceTree = "<group>"; };
 		39B5A7EC6B137AFE2B53270E /* Pods-Trackr2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trackr2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Trackr2/Pods-Trackr2.debug.xcconfig"; sourceTree = "<group>"; };
 		AA4E2648548EAA7F897D5C6C /* Pods-Trackr2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trackr2Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Trackr2Tests/Pods-Trackr2Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		B91B1DF31ED25DFA001CCDF1 /* MCNetworkLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCNetworkLayer.swift; sourceTree = "<group>"; };
+		B91B1DF51ED26554001CCDF1 /* MCExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCExtensions.swift; sourceTree = "<group>"; };
 		B9364B9F1ECE4FEB00B5F7E0 /* Trackr2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trackr2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9364BA21ECE4FEB00B5F7E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B9364BA91ECE4FEB00B5F7E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -68,10 +72,11 @@
 		B9364BE11ECEF12600B5F7E0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B9364BE51ECEF55400B5F7E0 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		B9364BE71ECEF57C00B5F7E0 /* MCDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCDetailsViewController.swift; sourceTree = "<group>"; };
-		B9364BE91ECF082600B5F7E0 /* Trackr.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Trackr.plist; path = Trackr2/Trackr.plist; sourceTree = "<group>"; };
+		B9364BE91ECF082600B5F7E0 /* Trackt.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Trackt.plist; path = Trackr2/Trackt.plist; sourceTree = "<group>"; };
 		B9364BEB1ECF2C0B00B5F7E0 /* MCDataLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCDataLayer.swift; sourceTree = "<group>"; };
 		B9364BEF1ED057F600B5F7E0 /* MCMovieTableListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCMovieTableListViewModel.swift; sourceTree = "<group>"; };
 		B9364BF11ED097F600B5F7E0 /* MCMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCMovie.swift; sourceTree = "<group>"; };
+		B97E70F81ED4D1B900EE3DD1 /* MCSerializableStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCSerializableStruct.swift; sourceTree = "<group>"; };
 		B991E7A21ED0B953008D5C0C /* MCWhisperWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCWhisperWrapper.swift; sourceTree = "<group>"; };
 		E50B01694508FB889B84267E /* Pods_Trackr2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Trackr2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -105,11 +110,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B91B1DF71ED369F6001CCDF1 /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				B9364BCE1ECEE25500B5F7E0 /* MCtmdbAPI.swift */,
+			);
+			name = Unused;
+			sourceTree = "<group>";
+		};
 		B9364B961ECE4FEB00B5F7E0 = {
 			isa = PBXGroup;
 			children = (
 				B9364BE51ECEF55400B5F7E0 /* R.generated.swift */,
-				B9364BE91ECF082600B5F7E0 /* Trackr.plist */,
+				B9364BE91ECF082600B5F7E0 /* Trackt.plist */,
 				B9364BA11ECE4FEB00B5F7E0 /* Trackr2 */,
 				B9364BB61ECE4FEB00B5F7E0 /* Trackr2Tests */,
 				B9364BA01ECE4FEB00B5F7E0 /* Products */,
@@ -130,13 +143,14 @@
 		B9364BA11ECE4FEB00B5F7E0 /* Trackr2 */ = {
 			isa = PBXGroup;
 			children = (
-				B9364BE21ECEF2C900B5F7E0 /* Lib */,
 				B9364BA21ECE4FEB00B5F7E0 /* AppDelegate.swift */,
+				B9364BE21ECEF2C900B5F7E0 /* Lib */,
 				B991E7A11ED0B93A008D5C0C /* Utils */,
 				B9364BD21ECEE26400B5F7E0 /* API */,
 				B991E7A51ED0BB21008D5C0C /* Views */,
 				B9364BC81ECE520B00B5F7E0 /* Model */,
 				B9364BCA1ECE526000B5F7E0 /* MCConstants.swift */,
+				B91B1DF51ED26554001CCDF1 /* MCExtensions.swift */,
 				B9364BA91ECE4FEB00B5F7E0 /* Assets.xcassets */,
 				B9364BAE1ECE4FEB00B5F7E0 /* Info.plist */,
 				B9364BD51ECEF0C400B5F7E0 /* Main.storyboard */,
@@ -158,7 +172,9 @@
 		B9364BC81ECE520B00B5F7E0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B97E70F81ED4D1B900EE3DD1 /* MCSerializableStruct.swift */,
 				B9364BEB1ECF2C0B00B5F7E0 /* MCDataLayer.swift */,
+				B91B1DF31ED25DFA001CCDF1 /* MCNetworkLayer.swift */,
 				B9364BC41ECE515E00B5F7E0 /* MCModel.swift */,
 				B9364BF11ED097F600B5F7E0 /* MCMovie.swift */,
 			);
@@ -169,7 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				B9364BEE1ED057E200B5F7E0 /* ViewModel */,
-				B9364BC21ECE514400B5F7E0 /* MCMovieTableViewCell.swift */,
+				B97E70F71ED49A8100EE3DD1 /* Cell */,
 				B9364BC61ECE51A600B5F7E0 /* MCMovieListTableViewController.swift */,
 			);
 			name = Trending;
@@ -178,8 +194,8 @@
 		B9364BD21ECEE26400B5F7E0 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				B91B1DF71ED369F6001CCDF1 /* Unused */,
 				B9364BD31ECEE27200B5F7E0 /* MCAPIProtocol.swift */,
-				B9364BCE1ECEE25500B5F7E0 /* MCtmdbAPI.swift */,
 				B9364BD01ECEE26000B5F7E0 /* MCTraktAPI.swift */,
 			);
 			name = API;
@@ -199,6 +215,14 @@
 				B9364BEF1ED057F600B5F7E0 /* MCMovieTableListViewModel.swift */,
 			);
 			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		B97E70F71ED49A8100EE3DD1 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B9364BC21ECE514400B5F7E0 /* MCMovieTableViewCell.swift */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		B991E7A11ED0B93A008D5C0C /* Utils */ = {
@@ -331,7 +355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9364BAA1ECE4FEB00B5F7E0 /* Assets.xcassets in Resources */,
-				B9364BEA1ECF082600B5F7E0 /* Trackr.plist in Resources */,
+				B9364BEA1ECF082600B5F7E0 /* Trackt.plist in Resources */,
 				B9364BDE1ECEF11800B5F7E0 /* Localizable.strings in Resources */,
 				B9364BD71ECEF0C400B5F7E0 /* Main.storyboard in Resources */,
 			);
@@ -459,11 +483,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9364BCD1ECE527700B5F7E0 /* UAObfuscatedString.swift in Sources */,
+				B97E70F91ED4D1B900EE3DD1 /* MCSerializableStruct.swift in Sources */,
 				B9364BC71ECE51A600B5F7E0 /* MCMovieListTableViewController.swift in Sources */,
 				B9364BE81ECEF57C00B5F7E0 /* MCDetailsViewController.swift in Sources */,
+				B91B1DF61ED26554001CCDF1 /* MCExtensions.swift in Sources */,
 				B9364BC51ECE515F00B5F7E0 /* MCModel.swift in Sources */,
-				B9364BCF1ECEE25600B5F7E0 /* MCtmdbAPI.swift in Sources */,
 				B9364BCB1ECE526000B5F7E0 /* MCConstants.swift in Sources */,
+				B91B1DF41ED25DFA001CCDF1 /* MCNetworkLayer.swift in Sources */,
 				B991E7A31ED0B953008D5C0C /* MCWhisperWrapper.swift in Sources */,
 				B9364BD11ECEE26000B5F7E0 /* MCTraktAPI.swift in Sources */,
 				B9364BA31ECE4FEB00B5F7E0 /* AppDelegate.swift in Sources */,
